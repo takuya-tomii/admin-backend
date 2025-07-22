@@ -1,0 +1,51 @@
+services:
+  bot_admin_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: local
+      extra_hosts:
+        - 'registry.yarnpkg.com:104.16.1.35'
+    image: bot_admin_backend
+    container_name: bot_admin_backend
+    env_file:
+      - .env.local
+    ports:
+      - '127.0.0.1:3010:3010'
+    depends_on:
+      - 'mongodb'
+    links:
+      - mongodb:mongodb
+    volumes:
+      - ./src:/app/src
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./package.json:/app/package.json
+      - ./yarn.lock:/app/yarn.lock
+    networks:
+      - default
+    restart: unless-stopped
+  mongodb:
+    image: mongo:8
+    container_name: botv2_mongodb
+    ports:
+      - '127.0.0.1:27017:27017'
+    networks:
+      - default
+    volumes:
+      - type: volume
+        source: v2mongo-db
+        target: /data/db
+      - type: volume
+        source: v2mongo-configdb
+        target: /data/configdb
+    restart: unless-stopped
+volumes:
+  v2mongo-db:
+    external: true
+    name: botv2_mongodb-db
+  v2mongo-configdb:
+    external: true
+    name: botv2_mongodb-configdb
+networks:
+  default:
+    name: 'mobiv2-network'

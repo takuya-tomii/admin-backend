@@ -1,0 +1,34 @@
+export const ENV_KEYS = {
+  TZ: 'TZ',
+  NODE_ENV: 'NODE_ENV',
+  CONFIG_ENV: 'CONFIG_ENV',
+  DATABASE: {
+    URI: 'DATABASE_URI',
+  },
+  CORS_ORIGINS: 'CORS_ORIGINS',
+  LISTEN: {
+    PORT: 'LISTEN_PORT',
+    ADDRESS: 'LISTEN_ADDRESS',
+  },
+  AUTH: {
+    JWT_SECRET: 'AUTH_JWT_SECRET',
+    REFRESH_TOKEN_SECRET: 'AUTH_REFRESH_TOKEN_SECRET',
+    COOKIE_SECRET: 'AUTH_COOKIE_SECRET',
+    SESSION_EXPIRY: 'AUTH_SESSION_EXPIRY',
+    REFRESH_TOKEN_EXPIRY: 'AUTH_REFRESH_TOKEN_EXPIRY',
+    JWT_ISSUER: 'AUTH_JWT_ISSUER',
+    JWT_AUDIENCE: 'AUTH_JWT_AUDIENCE',
+  },
+} as const;
+
+export const NODE_ENVS = {
+  DEVELOPMENT: 'development',
+  PRODUCTION: 'production',
+} as const;
+
+export const CONFIG_ENVS = {
+  DEVELOPMENT: 'development',
+  PRODUCTION: 'production',
+  TEST: 'test',
+  LOCAL: 'local',
+} as const;
